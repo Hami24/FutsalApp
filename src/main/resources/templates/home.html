@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ <meta name="description" content="futsalApp"/>
+ <meta name="author" content="MH"/>
+ <title>Home page</title>
+ <link rel="stylesheet" href="css/bootstrap.min.css"/>
+ <link rel="stylesheet" href="css/home.css"/>
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+</head>
+<body class="no-padding">
+ <nav class="navbar navbar-dark navbar-expand-md bg-dark p-3">
+	<a href="" class="navbar-brand"><i class="fa fa-soccer-ball-o"></i>Futsal</a>
+ 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+ 		<span class="navbar-toggler-icon"></span>
+ 	</button>
+    
+    
+    <div class="collapse navbar-collapse" id="navbarHome">
+    	<ul class="navbar-nav mr-auto">
+    		<li class="nav-item">
+    			<a th:if="${auth == '[ROLE_ADMIN]'}" href="/admin/dashboard" class="nav-link active"><i class="fa fa-user"></i>Admin dashboard</a>
+    			<a th:if="${auth == '[ROLE_USER]'}" href="/user/home" class="nav-link active"><i class="fa fa-user"></i>User homepage</a>
+    		</li>
+    	</ul>
+    	<form th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+      		<button class="btn btn-outline-black my-2 my-sm-0" type="submit">Logout</button>
+    	</form>
+    </div>
+ </nav>
+        
+ <div class="row">
+  <div class="col-md-12 slika">
+    <h1 class="h1-responsive tekst">Welcome</h1>
+   </div>    
+ </div> 
+        
+        
+ <footer id="main-footer" class="bg-dark text-white p-5">
+   <div class="container">
+     <div class="row">
+       <div class="col">
+         <p class="lead text-center">
+          Muhamed Handukić | 2018
+         </p>
+        </div>
+     </div>
+   </div>
+ </footer>
+ 
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="js/bootstrap.js"></script>
+<!-- Scripts -->
+</body>
+</html>

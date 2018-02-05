@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ <meta name="description" content="futsalApp"/>
+ <meta name="author" content="MH"/>
+ <title>User home</title>
+ <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+ <nav class="navbar navbar-dark navbar-expand-md bg-dark p-3" id="mainNavbar">
+	<a href="/user/home" class="navbar-brand"><i class="fa fa-soccer-ball-o"></i>Futsal</a>
+ 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+ 		<span class="navbar-toggler-icon"></span>
+ 	</button>
+    
+    <div class="collapse navbar-collapse" id="navbarHome">
+    	<ul class="navbar-nav ml-auto">
+    		<li class="nav-item">
+    			<a href="#topplayers" class="nav-link mr-3">Top 3 players</a>
+    		</li>
+    		<li class="nav-item">
+    			<a href="#players" class="nav-link mr-3">All players</a>
+    		</li>
+    		<li class="nav-item">
+    			<a href="#games" class="nav-link mr-3">All games</a>
+    		</li>
+    	</ul>
+    	<form th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+      		<button class="btn btn-outline-black my-2 my-sm-0" type="submit">Logout</button>
+    	</form>
+    </div>
+ </nav>
+<div data-spy="scroll" data-target="#mainNavbar" data-offset="0">
+<header class="py-3 bg-primary text-white" id="topplayers">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-user mr-2"></i>Top 3 players</h1>
+					
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container-fluid mt-3">
+	<div class="row">
+		<div class="col-md-4 mt-3" th:each = "topPlayer : ${topplayers}">
+			<div class="card border-primary">
+				<div class="card-header border-primary" th:text = "${topPlayer.playerName}">
+				</div>
+				<div class="card-body">
+					 Average player rating 
+					 <p th:inline="text">
+					 	[[${topPlayer.rating}]]
+					 	<i class="fa fa-star-o text-danger"></i>
+					 </p> 
+				</div>
+			
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+<header class="py-3 mt-3 bg-primary text-white" id="players">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-user mr-2"></i>All players</h1>
+					
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container-fluid mt-3">
+	<div class="row">
+		<div class="col-md-4 mt-3" th:each = "player : ${players}">
+			<div class="card border-primary">
+				<div class="card-header border-primary" th:text = "${player.playerName}">
+				</div>
+				<div class="card-body">
+					<ul class="list-group">
+						<li class="list-group-item" th:inline="text">
+							Scoring [[${player.scoring}]] <i class="fa fa-star-o text-danger"></i>
+						</li>
+						<li class="list-group-item" th:inline="text">
+							Defending [[${player.defending}]] <i class="fa fa-star-o text-danger"></i>
+						</li>
+						<li class="list-group-item" th:inline="text">
+							Passing [[${player.passing}]] <i class="fa fa-star-o text-danger"></i>
+						</li>
+						<li class="list-group-item" th:inline="text">
+							Goalkeeping [[${player.goalkeeping}]] <i class="fa fa-star-o text-danger"></i>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+<header class="py-3 mt-3 bg-primary text-white" id="games">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-user mr-2"></i>All games</h1>
+					
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="container-fluid mt-3 mb-4">
+	<div class="row">
+		<div class="col-md-4 mt-3" th:each = "game : ${games}">
+			<div class="card border-primary">
+				<div class="card-header border-primary">
+					Game 
+				</div>
+				<div class="card-body">
+					<ul class="list-group">
+						<li class="list-group-item" th:text ="${game.date}"></li>
+						<li class="list-group-item" th:text ="${game.sportsHall}"></li>
+						<li class="list-group-item">
+						<select class="form-control">
+		      				<option>Players</option>
+		      				<option th:each="player : ${game.players}" value="${player.playerId}" th:text="${player.playerName}"></option>
+		      			</select>	
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</div>
+	
+	</div>
+</div>
+</div>
+</body>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+<!-- Scripts -->
+</html>

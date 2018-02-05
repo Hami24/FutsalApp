@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif; 
+  }
+  
+  body {
+    overflow-x: hidden; 
+  }
+  
+  .navbar-brand {
+    letter-spacing: 5px; 
+  }
+  
+  .slika {
+    height: 90vh;
+    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9)), url("http://www.cysportscenter.com/wp-content/uploads/2016/03/FullSizeRender.jpg");
+    background-size: cover; 
+ }
+ .slika .tekst {
+      color: #FFF;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%);
+      font-weight: 700;
+      letter-spacing: 20px;
+      font-family: 'Montserrat', sans-serif;
+      animation-name: moveInTop;
+      animation-duration: 2s; 
+ }
+  
+  @keyframes moveInTop {
+    from {
+      top: 10px; } 
+  }
+  
+  .fa {
+    margin-right: 5px; 
+  }
+  

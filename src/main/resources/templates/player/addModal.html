@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add player</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form th:action="@{player/addPlayer}" method="post" th:object="${player}">
+      <div class="modal-body">
+      	<div class="form-group">
+      		
+      		<input type="text" th:field="*{playerId}" value="0" disabled="true" hidden="true"/>
+      		<label for="#playerName">Player name</label>
+			<input type="text" th:field="*{playerName}" class="form-control" required="required" id="#playerName"/>
+			
+			<label for="#scoring">Scoring rating</label>
+			<select class="form-control" id="scoring" th:field="*{scoring}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+			<label for="#pasing" class="mt-2">Passing rating</label>
+			<select class="form-control" id="passing" th:field="*{passing}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+    		
+    		<label for="#defending" class="mt-2">Defending rating</label>
+			<select class="form-control" id="defending" th:field="*{defending}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+			
+			<label for="#goalkeeping" class="mt-2">Goalkeeping rating</label>
+			<select class="form-control" id="passing" th:field="*{goalkeeping}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+      	
+      	</div>
+			
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >Add player</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal -->

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ <meta name="description" content="futsalApp"/>
+ <meta name="author" content="MH"/>
+ <title>Update player</title>
+ <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+ <nav class="navbar navbar-dark navbar-expand-md bg-dark p-3" id="mainNavbar">
+	<a href="/admin/dashboard" class="navbar-brand"><i class="fa fa-soccer-ball-o"></i>Futsal</a>
+ 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+ 		<span class="navbar-toggler-icon"></span>
+ 	</button>
+    
+    <div class="collapse navbar-collapse" id="navbarHome">
+    	<form th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+      		<button class="btn btn-outline-black my-2 my-sm-0" type="submit">Logout</button>
+    	</form>
+    </div>
+ </nav>
+<header class="py-3 bg-primary text-white" id="players">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-user mr-2"></i>Update player</h1>	
+			</div>
+		</div>
+	</div>
+</header>
+
+<form th:action="@{/admin//player/addPlayer}" method="post" th:object="${player}">
+      	<div class="form-group m-4">
+      		
+      		<input type="text" th:field="*{playerId}" hidden="true"/>
+      		<label for="#playerName" class="mt-2">Player name</label>
+			<input type="text" th:field="*{playerName}" class="form-control" id="#playerName" required="true"/>
+			
+			<label for="#scoring" class="mt-2">Scoring rating</label>
+			<select class="form-control" id="scoring" th:field="*{scoring}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+			<label for="#pasing" class="mt-2">Passing rating</label>
+			<select class="form-control" id="passing" th:field="*{passing}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+    		
+    		<label for="#defending" class="mt-2">Defending rating</label>
+			<select class="form-control" id="defending" th:field="*{defending}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+			
+			<label for="#goalkeeping" class="mt-2">Goalkeeping rating</label>
+			<select class="form-control" id="passing" th:field="*{goalkeeping}">
+      			<option value="1">1 star</option>
+      			<option value="2">2 stars</option>
+      			<option value="3">3 stars</option>
+      			<option value="4">4 stars</option>
+      			<option value="5">5 stars</option>
+    		</select>
+      	
+      	</div>
+			
+		<button type="submit" class="btn btn-primary m-4">Update player</button>
+		<a href="/admin/dashboard" class="btn btn-primary" >Go back!</a>	
+</form>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+<!-- Scripts -->
+</body>
+</html>

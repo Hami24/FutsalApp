@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row m-5 text-center">
+    <div class="col-md-4 offset-md-4">
+        <form class="sign-in" name="forma" th:action="@{/}" method="post">
+          <div th:if="${param.error}" class="alert alert-danger">Wrong credentials!</div>
+          <div th:if="${param.logout}" class="alert alert-success">Logout was successful</div> 
+          <h2 class="p-3">Enter your credentials</h2>
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" id="username" class="form-control" name="username" placeholder="Username"/>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" name="password" id="inputPassword" class="form-control mt-3" placeholder="Password" />
+          <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 w-50 border" id="dugme" type="submit">Sign in</button>
+        </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

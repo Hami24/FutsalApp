@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ <meta name="description" content="futsalApp"/>
+ <meta name="author" content="MH"/>
+ <title>Dashboard</title>
+ <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"/>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+ <nav class="navbar navbar-dark navbar-expand-md bg-dark p-3" id="mainNavbar">
+	<a href="/admin/dashboard" class="navbar-brand"><i class="fa fa-soccer-ball-o"></i>Futsal</a>
+ 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+ 		<span class="navbar-toggler-icon"></span>
+ 	</button>
+    
+    <div class="collapse navbar-collapse" id="navbarHome">
+    	<ul class="navbar-nav ml-auto">
+    		<li class="nav-item">
+    			<a href="#players" class="nav-link mr-3">Players</a>
+    		</li>
+    		<li class="nav-item">
+    			<a href="#games" class="nav-link mr-3">Games</a>
+    		</li>
+    	</ul>
+    	<form th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+      		<button class="btn btn-outline-black my-2 my-sm-0" type="submit">Logout</button>
+    	</form>
+    </div>
+ </nav>
+<div data-spy="scroll" data-target="#mainNavbar" data-offset="0">
+<header class="py-3 bg-primary text-white" id="players">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-user mr-2"></i>Players</h1>
+					
+			</div>
+		</div>
+	</div>
+</header>
+<div th:include="player/addModal"></div>
+<table class="table table-md mb-4">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  
+  <tbody th:each="player : ${players}">
+    <tr>
+      <th scope="row" th:text="${player.playerId}"></th>
+      <td th:text="${player.playerName}"></td>
+      <td><a href="#" th:href="@{'player/update/' + ${player.playerId}}" class="btn btn-primary">Update player</a></td>
+      <td>
+      <a href="#" th:href="@{'player/delete/' + ${player.playerId}}" class="btn btn-primary">Delete player</a>
+  	  </td>
+    
+    </tr>
+    
+  </tbody>
+</table>
+<div class="container-fluid">
+	<div class="d-flex flex-row">
+		<div class="p-2">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+  			Add new player
+			</button>
+		</div>
+		<div class="p-1">
+			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.deleteDone}">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		   <span aria-hidden="true">&times;</span>
+  			  </button>	
+			Player successfully deleted
+			</div>
+			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.updateDone}">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		   <span aria-hidden="true">&times;</span>
+  			  </button>	
+			Player successfully added/updated
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<header class="py-3 mt-4 bg-primary text-white" id="games">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><i class="fa fa-soccer-ball-o mr-2"></i>Games</h1>
+					
+			</div>
+		</div>
+	</div>
+</header>
+<div th:include="game/addGame"></div>
+<table class="table table-md mb-4">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Sports Hall</th>
+      <th scope="col">Date</th>
+      <th scope="col">All Players</th>
+    </tr>
+  </thead>
+  
+  <tbody th:each="game : ${games}">
+    <tr>
+      <th scope="row" th:text="${game.gameId}"></th>
+      <td scope="row" th:text="${game.sportsHall}"></td>
+      <td scope="row" th:text="${game.date}"></td>
+      <td>
+      	<select class="form-control">
+      		<option>Players</option>
+      		<option th:each="player : ${game.players}" value="${player.playerId}" th:text="${player.playerName}"></option>
+      	</select>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<div class="container-fluid">
+	<div class="d-flex flex-row">
+		<div class="p-2">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGameModal">
+  			Add new game
+			</button>
+		</div>
+		<div class="p-1">
+			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.gameDone}">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		   <span aria-hidden="true">&times;</span>
+  			  </button>	
+			Game added!
+
+			</div>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.notSelected}">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		   <span aria-hidden="true">&times;</span>
+  			  </button>	
+			You need to select at least 10 players!
+			</div>
+		</div>
+		
+	</div>
+</div>
+</div>
+</body>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+$('.datepicker').datepicker();
+</script>
+<!-- Scripts -->
+</html>
